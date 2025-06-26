@@ -1,0 +1,25 @@
+{
+	"testName": "PDMStest32-unscaled",
+	"testInfo": "Using unscaled hex mesh, -o 1, -r 1. 5 frequencies, correct E' and E''. u1 = u2 = 0 on top.",
+	
+	
+	"Simulation Parameters": {
+		"Total simulation time": 5,
+		"Time steps" : 1500
+	},
+
+	"Boundary Conditions": {
+		"Frequencies": [0.0795775, 0.159155, 0.238732, 0.31831, 0.397887],
+		"In-phase displacements" : [-0.000015750, -0.000015261,-0.0000144648, -0.000013392, -0.000012083],
+		"Out-of-phase displacements" : [-0.0000019791, -0.00000389667, -0.00000569374, -0.00000731632, -0.0000087158]
+	},
+   
+	"Material Parameters" : {
+	  	"Storage moduli" : [2710000, 2750000, 2780000, 2810000, 2900000],
+	  	"Loss moduli" : [220000, 240000, 260000, 280000, 290000],
+	  	"Poisson ratio" : 0.49,
+		"Density" : 1030
+
+	}
+}
+	

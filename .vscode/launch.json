@@ -1,0 +1,19 @@
+{
+   // "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C/C++: make and debug current file", // name that appears in the panel
+            "type": "cppdbg", // c++ debug
+            "request": "launch", // launch program
+            "program": "${fileDirname}/${fileBasenameNoExtension}", // program name.
+            "args": [], // extra arguments. Use this to specify arguments for your program
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}", // path to run your program. Matters when you use relative path in your program
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "Build current file with MFEM" 
+        }
+    ],
+    "version": "2.0.0"
+}

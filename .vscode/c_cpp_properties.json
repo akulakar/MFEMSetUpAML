@@ -1,0 +1,25 @@
+{
+	"configurations": [
+	  {
+		"name": "Mac",
+		"includePath": [
+		  "${workspaceFolder}/**",
+		  "${workspaceFolder}/../../serial/mfem",
+		  "${workspaceFolder}/../../serial/mfem/fem",
+		  "${workspaceFolder}/../../serial/mfem/data",
+		  "${workspaceFolder}/../../serial/mfem/linalg",
+		  "${workspaceFolder}/../../serial/mfem/general",
+		  "${workspaceFolder}/../../serial/mfem/mesh",
+		  "${workspaceFolder}/../../mfemplus",
+		  "/opt/homebrew/Cellar/nlohmann-json/3.12.0/include"
+		],
+		"defines": [],
+		"macFrameworkPath": [],
+		"compilerPath": "/usr/bin/clang++",  // or g++ if you prefer
+		"cStandard": "c17",
+		"cppStandard": "c++17",
+		"intelliSenseMode": "macos-clang-arm64"
+	  }
+	],
+	"version": 4
+}
