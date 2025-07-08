@@ -1,0 +1,18 @@
+# Ignore .dat files
+*.txt
+*.vtu
+*.pvtu
+
+# Optional: Ignore build artifacts
+/build/
+/.vscode/
+/CMakeFiles/
+/CMakeCache.txt
+cmake_install.cmake
+Makefile
+.DS_Store
+
+# Optional: Ignore results
+/results/
+
+# Optional: Ignore scripts
