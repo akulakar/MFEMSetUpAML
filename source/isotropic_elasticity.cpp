@@ -24,18 +24,17 @@ int main(int argc, char *argv[])
    // Parse command-line options.
    const char *mesh_file = "../mesh/AnnularCylinder-tet.mesh";  
    int order = 1;
-   bool static_cond = false;
    bool visualization = 0;
+   int iterations = 1000;
    int ref_levels = 0;
 
    OptionsParser args(argc, argv);
    args.AddOption(&order, "-o", "--order",
                   "Finite element order (polynomial degree).");
-   args.AddOption(&visualization, "-vis", "--visualization", "-no-vis",
-                  "--no-visualization",
-                  "Enable or disable GLVis visualization.");
    args.AddOption(&ref_levels, "-r", "--ref_levels",
                   "Number of uniform mesh refinements.");
+   args.AddOption(&iterations, "-it", "--iterations",
+                     "Number of solver iterations.");
    args.Parse();
 
    // Read the mesh from the given mesh file. 
@@ -145,8 +144,9 @@ int main(int argc, char *argv[])
 
    a->FormLinearSystem(ess_tdof_list, u, *b, A, X, B);
 
+   // Use a Conjugate Gradient solver to solve the linear system with Gauss-Seidel preconditioner.
    GSSmoother M(A);
-   PCG(A, M, B, X, 0, 500, 1e-8, 0.0);
+   PCG(A, M, B, X, 1, iterations, 1e-8, 0.0);
 
    cout << "Linear system solved" << endl;
 
@@ -154,11 +154,12 @@ int main(int argc, char *argv[])
   
    a->RecoverFEMSolution(X,*b,u);
    
-   ofstream mfemoutput("output/mfemoutput.dat");
-   u.Save(mfemoutput);
-   mfemoutput.close();
+   //  Optional. Save displacement data.
+   //  ofstream dispdata("../results/IsotropicDisp.dat");
+   //  dispdata.precision(8);
+   //  u.Save(dispdata);
 
-   // Now calculate strains and stress with the customfunctions in mfemplus.
+   // Create GlobalStressStrain object to calculate strains and stresses.
 
    mfemplus::GlobalStressStrain StressStrain(mesh, fespace);
    GridFunction strain, stress;

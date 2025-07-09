@@ -3,18 +3,15 @@
 	  {
 		"name": "Mac",
 		"includePath": [
-		  "${workspaceFolder}/**",
-		  "${workspaceFolder}/../../serial/mfem",
-		  "${workspaceFolder}/../../serial/mfem/fem",
-		  "${workspaceFolder}/../../serial/mfem/data",
-		  "${workspaceFolder}/../../serial/mfem/linalg",
-		  "${workspaceFolder}/../../serial/mfem/general",
-		  "${workspaceFolder}/../../serial/mfem/mesh",
-		  "${workspaceFolder}/../software/metis-5.1.0/include",
-		  "${workspaceFolder}/../software/hypre/src/hypre/include",
+		  "${workspaceFolder}/../../software/mfem",
+		  "${workspaceFolder}/../../software/mfem/fem",
+		  "${workspaceFolder}/../../software/mfem/linalg",
+		  "${workspaceFolder}/../../software/mfem/general",
+		  "${workspaceFolder}/../../software/metis-5.1.0/include",
+		  "${workspaceFolder}/../../software/hypre/src/hypre/include",
 		  "${workspaceFolder}/../../mfemplus",
-		   "/opt/homebrew/opt/open-mpi/include",
-		  "/opt/homebrew/Cellar/nlohmann-json/3.12.0/include"
+		  "/opt/homebrew/Cellar/nlohmann-json/3.12.0/include",
+		  "/opt/homebrew/opt/open-mpi/include"
 		],
 		"defines": [],
 		"macFrameworkPath": [],
@@ -25,4 +22,4 @@
 	  }
 	],
 	"version": 4
-}
+  }
