@@ -140,7 +140,6 @@ int main(int argc, char *argv[])
 
    SparseMatrix A;
    Vector B, X;
-   Vector B, X;
 
    a->FormLinearSystem(ess_tdof_list, u, *b, A, X, B);
 
