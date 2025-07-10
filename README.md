@@ -106,7 +106,7 @@ Paraview will be used to visualize the results.
 
 ### Clone MFEMPLUS
 
-Clone MFEMPLUS from GitHub. Go back to the top level MFEM directory and run:
+Clone MFEMPLUS from GitHub. Go back to the software directory under the top level directory and run:
 
 	git clone https://github.com/akulakar/mfemplus.git
 
