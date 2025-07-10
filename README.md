@@ -30,7 +30,7 @@ Enter the projects directory and clone this GitHub repo.
 ### Building MFEM
 
 MFEM can be built both in serial and parallel. Serial MFEM codes will only run on one processor. However, for any practical large scale simulations, we need to run parallelized codes, therefore we will build MFEM parallel. However, the parallel build can also compile serial codes.
-Enter the *software*. It should be empty. The following assumes that you have git installed on your system. Open your terminal or your favorite terminal emulator. Wezterm and iTerm work well. Run the following commands.
+Enter the *software* directory. It should be empty. The following assumes that you have git installed on your system. Open your terminal or your favorite terminal emulator. Wezterm and iTerm work well. Run the following commands.
 
 #### Step 1: Install C++ compiler and CMake
 Check if you have a C++ compiler installed
@@ -58,7 +58,7 @@ Install CMake and Make. CMake is a build system generator. It produces the makef
 	tar -xzf metis-5.1.0.tar.gz
 	cd metis-5.1.0
 
-Metis uses CMake to build. CMake is a build system generator. What this means is CMake is used to generate the MakeFile, which is then used to build the actual executable from the cpp code that will be run on our machines. However, in the donwloaded Metis folder, the minimum CMake version specified is lower than what MFEM uses, so we need to change that. In the current folder, open *CMakeLists.txt* in Sublime Text. In the first line, change 
+Metis uses CMake to build. However, in the donwloaded Metis folder, the minimum CMake version specified is older than what MFEM uses, so we need to change that. In the current folder, open *CMakeLists.txt* in Sublime Text. In the first line, change 
 > cmake_minimum_required(VERSION 2.8) 
 to 
 > cmake_minimum_required(VERSION 3.12.0...4.0.0)
@@ -68,7 +68,7 @@ Now we can compile the Metis library.
 	make BUILDDIR=lib config
 	make BUILDDIR=lib -j8
 
-#### Step 3: Donwload and build Hypre
+#### Step 3: Download and build Hypre
 
 Hypre is a library of parallel sparse arrays and linear solvers.
 
@@ -89,7 +89,7 @@ First, clone MFEM.
 	cd mfem
 	git checkout v4.8
 
-This copies the git repository onto your local machine and switches to v4.8 branch. 
+This clones the git repository onto your local machine and switches to v4.8 branch. 
 Now build it.
 
 	make parallel -j8 MFEM_USE_MPI=YES MFEM_USE_METIS_5=YES METIS_DIR=@MFEM_DIR@/../metis-5.1.0
