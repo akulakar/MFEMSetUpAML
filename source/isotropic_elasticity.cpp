@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
    ConstantCoefficient young_mod_func(young_mod);
    ConstantCoefficient poisson_ratio_func(poisson_ratio);
 
-   a->AddDomainIntegrator(new mfemplus::ThreeDIsotropicElasticityIntegrator(young_mod_func,poisson_ratio_func));
+   a->AddDomainIntegrator(new mfemplus::IsotropicElasticityIntegrator(young_mod_func,poisson_ratio_func));
 
    // Assemble the bilinear form and the corresponding linear system. Elimate boundary conditions.
 

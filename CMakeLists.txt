@@ -27,7 +27,7 @@ set(HYPRE "${CMAKE_SOURCE_DIR}/../../software/hypre")
 set(METIS "${CMAKE_SOURCE_DIR}/../../software/metis-5.1.0")
 
 # Path to MFEMplus
-set(MFEMPLUS "${CMAKE_SOURCE_DIR}/../../mfemplus")
+set(MFEMPLUS "${CMAKE_SOURCE_DIR}/../../software/mfemplus")
 
 # Path nlohmann-json
 set(JSON "/opt/homebrew/Cellar/nlohmann-json/3.12.0/include")

@@ -9,7 +9,7 @@
 		  "${workspaceFolder}/../../software/mfem/general",
 		  "${workspaceFolder}/../../software/metis-5.1.0/include",
 		  "${workspaceFolder}/../../software/hypre/src/hypre/include",
-		  "${workspaceFolder}/../../mfemplus",
+		  "${workspaceFolder}/../../software/mfemplus",
 		  "/opt/homebrew/Cellar/nlohmann-json/3.12.0/include",
 		  "/opt/homebrew/opt/open-mpi/include"
 		],

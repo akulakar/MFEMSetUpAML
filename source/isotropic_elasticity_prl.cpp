@@ -148,7 +148,7 @@ int main(int argc, char *argv[])
   ConstantCoefficient E_func(E);
   ConstantCoefficient NU_func(NU);
 
-  a->AddDomainIntegrator(new mfemplus::ThreeDIsotropicElasticityIntegrator(E_func, NU_func));
+  a->AddDomainIntegrator(new mfemplus::IsotropicElasticityIntegrator(E_func, NU_func));
   
   //  Assemble the bilinear form and the corresponding linear system.
 
