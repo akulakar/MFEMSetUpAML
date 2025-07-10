@@ -54,6 +54,8 @@ Install CMake and Make. CMake is a build system generator. It produces the makef
 
 #### Step 2: Download and build Metis
 
+Go back to the software directory.
+
 	curl -sL https://github.com/mfem/tpls/raw/refs/heads/gh-pages/metis-5.1.0.tar.gz -o metis-5.1.0.tar.gz
 	tar -xzf metis-5.1.0.tar.gz
 	cd metis-5.1.0
