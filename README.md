@@ -61,9 +61,11 @@ Go back to the software directory.
 	cd metis-5.1.0
 
 Metis uses CMake to build. However, in the donwloaded Metis folder, the minimum CMake version specified is older than what MFEM uses, so we need to change that. In the current folder, open *CMakeLists.txt* in Sublime Text. In the first line, change 
-> cmake_minimum_required(VERSION 2.8) 
+> "cmake_minimum_required(VERSION 2.8)" 
+
 to 
-> cmake_minimum_required(VERSION 3.12.0...4.0.0)
+
+> "cmake_minimum_required(VERSION 3.12.0...4.0.0)"
 
 Now we can compile the Metis library. 
 
@@ -73,6 +75,7 @@ Now we can compile the Metis library.
 #### Step 3: Download and build Hypre
 
 Hypre is a library of parallel sparse arrays and linear solvers.
+Go back to the software directory.
 
 	curl -sL https://github.com/hypre-space/hypre/archive/refs/tags/v2.26.0.tar.gz -o hypre-2.26.0.tar.gz
 	tar -xzf hypre-2.26.0.tar.gz
@@ -85,7 +88,7 @@ Hypre is a library of parallel sparse arrays and linear solvers.
 #### Step 4: Clone and build MFEM
 
 We built Hypre and Metis first because the parallel build of MFEM requires these libraries.  
-First, clone MFEM.
+Clone MFEM.
 
 	git clone https://github.com/mfem/mfem.git
 	cd mfem
