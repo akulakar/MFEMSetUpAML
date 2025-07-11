@@ -151,7 +151,7 @@ Create three more subdirectories:
 	mkdir drivers results build
 
 
-*source* contains "isotropic_elasticity.cpp" and "isotropic_elasticity_prl.cpp". These are the two cpp files that we will want to build and execute.  *drivers* will contain supporting cpp files. For this project it is empty.  *scripts* contains a json file to store simulation parameters and mathematica file to generate meshes. You can also have mathematica scripts to visualize certain results or shell scripts to execute certain commands, and so on. *build* will contain the executables. The executables are the compiled code that will actually be run by the computer. results will contain results such as dispalecements, stresses, etc., and mesh will contain meshes.
+*source* contains "isotropic_elasticity.cpp" and "isotropic_elasticity_prl.cpp". These are the two cpp files that we will want to build and execute.  *drivers* will contain supporting cpp files. For this project it is empty.  *scripts* contains a json file to store simulation parameters and mathematica file to generate meshes. You can also have mathematica scripts to visualize certain results or shell scripts to execute certain commands, and so on. *build* will contain the executables. The executables are the compiled code that will actually be run by the computer. results will contain results such as dispalecements, stressesgit w, etc., and mesh will contain meshes.
 
 #### 2. .vscode settings
 
