@@ -18,6 +18,10 @@ Git add, commit, push, fetch, merge, and status are some common commands.
 
 ## Setting up MFEM
 
+The following instructions are to build on Mac. The build instructions are mostly from here with slight edits:
+>https://github.com/dohyun-cse/APMA2560-MFEM
+
+You can find instructions for Windows and Linux too.
 All of the following can be done on terminal. Set up your directories in the same way mentioned here. It will make it easier to integrate MFEM and MFEMPLUS (custom codes written for AML) into your codes and to share between AML. Create a clean new directory named "MFEM". Everything will be done installed there. Create the following subdirectories. 
 
 - MFEM
