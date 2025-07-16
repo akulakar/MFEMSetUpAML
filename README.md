@@ -198,3 +198,7 @@ Now you should have serial and parralel mfem codes compiling without issues. The
 
 This was not meant to be an exhaustive tutorial for MFEM by any means. In fact, it can feel quite overwhelming to get a hang of it. However, I PROMISE YOU it will not take longer than 2 weeks and an attempt at coding up something yourself to get acquainted with it. After that, it becomes fun!
 
+# Building MFEM on CCV
+
+Setting up the parallel build of MFEM on CCV is straightforward. 
+
