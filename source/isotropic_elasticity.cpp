@@ -47,12 +47,17 @@ int main(int argc, char *argv[])
       mesh->UniformRefinement();
    }
 
-   //  Define a finite element space on the mesh. Here we use a vector H1 finite space.
-   FiniteElementCollection *fec;
-   FiniteElementSpace *fespace;
+   //  Define a finite element space on the mesh. Here we use a vector H1 finite space. L2 space for stress and strain.
+   FiniteElementCollection *fec, *l2fec;
+   FiniteElementSpace *fespace, *l2fespace;
   
    fec = new H1_FECollection(order, dim);
    fespace = new FiniteElementSpace(mesh, fec, dim);
+
+   int str_comp = (dim == 2) ? 3 : 6;
+
+   l2fec = new L2_FECollection(0, dim);
+   l2fespace = new FiniteElementSpace(mesh, l2fec, str_comp);
 
    cout << "Number of finite element unknowns: " << fespace->GetTrueVSize() << endl ;
 
@@ -161,7 +166,8 @@ int main(int argc, char *argv[])
    // Create GlobalStressStrain object to calculate strains and stresses.
 
    mfemplus::GlobalStressStrain StressStrain(mesh, fespace);
-   GridFunction strain, stress;
+   GridFunction strain(l2fespace), stress(l2fespace);
+   strain = 0.0; stress = 0.0;
    StressStrain.GlobalStrain(u, strain);
    StressStrain.GlobalStress(strain, young_mod_func, poisson_ratio_func, stress);
 
