@@ -11,8 +11,7 @@
 #include <map>
 #include <initializer_list>
 #include <stdexcept>
-#include "../../mfemplus/custombilininteg.hpp"
-#include "../../mfemplus/customfunctions.hpp"
+#include "../../mfemplus/mfemplus.hpp"
 
 using namespace std;
 using namespace mfem;

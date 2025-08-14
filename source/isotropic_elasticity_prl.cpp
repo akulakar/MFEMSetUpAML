@@ -4,8 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <cmath>
-#include "../../mfemplus/custombilininteg.hpp"
-#include "../../mfemplus/customfunctions.hpp"
+#include "../../mfemplus/mfemplus.hpp"
 
 using namespace std;
 using namespace mfem;

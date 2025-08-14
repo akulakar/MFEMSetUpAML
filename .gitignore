@@ -1,5 +1,4 @@
 # Ignore .dat files
-*.txt
 *.vtu
 *.pvtu
 
