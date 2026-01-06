@@ -55,17 +55,17 @@ set(JSON "/opt/homebrew/Cellar/nlohmann-json/3.12.0/include")
 set(OPENMP "/opt/homebrew/Cellar/libomp/20.1.8/include/")
 
 # Get all cpp files in drivers directory
-file(GLOB DRV "${CMAKE_SOURCE_DIR}/source/*.cpp")
+file(GLOB SRC "${CMAKE_SOURCE_DIR}/source/*.cpp")
 
 # Loop over all .cpp files
-foreach(drv ${DRV})
+foreach(src ${SRC})
 
 	# Get filename without extension
-	 get_filename_component(build_name ${drv} NAME_WE)
+	 get_filename_component(build_name ${src} NAME_WE)
 
 
 	# Add source for the build
-	add_executable(${build_name} ${drv} 
+	add_executable(${build_name} ${src} 
 				     ${MFEMPLUS}/custombilininteg.cpp
 				     ${MFEMPLUS}/customfunctions.cpp 
 				     ${MFEMPLUS}/customoperators.cpp
@@ -75,20 +75,20 @@ foreach(drv ${DRV})
 	target_include_directories(${build_name} PRIVATE ${MFEM}
 							# ${MFEM}/include
 						    ${HYPRE}/src/hypre/include
-					      ${HYPRE}/src/utilities
-					      ${METIS}/include
-					      ${MFEMPLUS}
-				        ${JSON}
-				        ${MPI_CXX_INCLUDE_DIRS}
-				        ${OpenMP_CXX_INCLUDE_DIRS}
-								${OPENMP}
+					      	${HYPRE}/src/utilities
+					      	${METIS}/include
+					      	${MFEMPLUS}
+				        	${JSON}
+				        	${MPI_CXX_INCLUDE_DIRS}
+				        	${OpenMP_CXX_INCLUDE_DIRS}
+							${OPENMP}
 						    include		   					
 								)
 
 	# Link directory to search for libmfem.a, libhypre.a, libmetis.a
 	target_link_directories(${build_name} PRIVATE ${MFEM}
 					   	    ${HYPRE}/src/lib
-						    	${METIS}/lib/libmetis 
+						    ${METIS}/lib/libmetis 
 						    	)
 
 	# Link libraries to the executable

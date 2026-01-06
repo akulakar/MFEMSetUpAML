@@ -4,7 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <cmath>
-#include "../../mfemplus/mfemplus.hpp"
+#include <mfemplus.hpp>
 
 using namespace std;
 using namespace mfem;
@@ -28,19 +28,20 @@ int main(int argc, char *argv[])
 
   OptionsParser args(argc, argv);
   args.AddOption(&order, "-o", "--order",
-                "Finite element order (polynomial degree).");
+                 "Finite element order (polynomial degree).");
   args.AddOption(&ref_levels, "-r", "--ref_levels",
-                "Number of uniform mesh refinements.");
+                 "Number of uniform mesh refinements.");
   args.AddOption(&iterations, "-it", "--iterations",
-                "Number of solver iterations.");
+                 "Number of solver iterations.");
   args.Parse();
 
-  // Enable hardware devices such as GPUs, and programming models such as
-  // CUDA, OCCA, RAJA and OpenMP based on command line options.
   Device device(device_config);
-  if (myid == 0) { device.Print(); }
+  if (myid == 0)
+  {
+    device.Print();
+  }
 
-  // Read the (serial) mesh from the given mesh file on all processors. 
+  // Read the (serial) mesh from the given mesh file on all processors.
   Mesh *mesh = new Mesh(mesh_file, 1, 1);
   int dim = mesh->Dimension();
 
@@ -48,8 +49,8 @@ int main(int argc, char *argv[])
   {
     mesh->UniformRefinement();
   }
-  
-  // Define a parallel mesh by a partitioning of the serial mesh. Refine this mesh further in 
+
+  // Define a parallel mesh by a partitioning of the serial mesh. Refine this mesh further in
   // parallel to increase the resolution. Once the parallel mesh is defined, the serial mesh can be deleted.
 
   ParMesh *pmesh = new ParMesh(MPI_COMM_WORLD, *mesh);
@@ -65,17 +66,17 @@ int main(int argc, char *argv[])
 
   // Determine the essential (Dirichlet) boundary dofs.
 
-  Array<int> ess_tdof_listx, ess_tdof_listy, ess_tdof_listz, 
-  ess_tdof_listx_ser, ess_tdof_listy_ser, ess_tdof_listz_ser,
-  ess_bdr_x(pmesh->bdr_attributes.Max()), ess_bdr_y(pmesh->bdr_attributes.Max()), ess_bdr_z(pmesh->bdr_attributes.Max());
+  Array<int> ess_tdof_listx, ess_tdof_listy, ess_tdof_listz,
+      ess_tdof_listx_ser, ess_tdof_listy_ser, ess_tdof_listz_ser,
+      ess_bdr_x(pmesh->bdr_attributes.Max()), ess_bdr_y(pmesh->bdr_attributes.Max()), ess_bdr_z(pmesh->bdr_attributes.Max());
 
   ess_bdr_x = 0;
   ess_bdr_x[0] = 1;
 
-  ess_bdr_y = 0; 
+  ess_bdr_y = 0;
   ess_bdr_y[0] = 1;
 
-  ess_bdr_z = 0; 
+  ess_bdr_z = 0;
   ess_bdr_z[0] = 1;
   ess_bdr_z[1] = 1;
 
@@ -85,10 +86,9 @@ int main(int argc, char *argv[])
 
   Array<int> ess_tdof_list, ess_tdof_list_ser;
 
-  ess_tdof_list.Append(ess_tdof_listx); 
-  ess_tdof_list.Append(ess_tdof_listy); 
+  ess_tdof_list.Append(ess_tdof_listx);
+  ess_tdof_list.Append(ess_tdof_listy);
   ess_tdof_list.Append(ess_tdof_listz);
-
 
   //   Set up the linear form b(.) which corresponds to the right-hand side of the FEM linear system.
 
@@ -98,14 +98,14 @@ int main(int argc, char *argv[])
   // {
   //    f.Set(i, new ConstantCoefficient(0.0));
   // }
-  
+
   // Vector pull_force(mesh->bdr_attributes.Size());
   // pull_force = 0.0;
   // pull_force(1) = 250000.0;
 
   // f.Set(2, new PWConstCoefficient(pull_force));
 
-  ParLinearForm* b = new ParLinearForm(fespace);
+  ParLinearForm *b = new ParLinearForm(fespace);
   // b->AddBoundaryIntegrator(new VectorBoundaryLFIntegrator(f));
 
   // VectorArrayCoefficient bodyforce(dim);
@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
 
   cout << "RHS assembled" << endl;
 
-  // Define the solution vector x as a finite element grid function corresponding to fespace. 
+  // Define the solution vector x as a finite element grid function corresponding to fespace.
   // Initialize x with an initial guess of zero, which satisfies the boundary conditions.
 
   ParGridFunction u(fespace);
@@ -137,10 +137,10 @@ int main(int argc, char *argv[])
 
   u.ProjectBdrCoefficient(dirichlet, ess_bdr_z);
 
-  // Set up the bilinear form a(.,.) on the finite element space. 
+  // Set up the bilinear form a(.,.) on the finite element space.
   // Use the ThreeDIsotropicElasticityIntegrator from mfemplus.
 
-  ParBilinearForm* a = new ParBilinearForm(fespace);
+  ParBilinearForm *a = new ParBilinearForm(fespace);
 
   float E = 100.0;
   float NU = 0.4;
@@ -148,11 +148,11 @@ int main(int argc, char *argv[])
   ConstantCoefficient NU_func(NU);
 
   a->AddDomainIntegrator(new mfemplus::IsotropicElasticityIntegrator(E_func, NU_func));
-  
+
   //  Assemble the bilinear form and the corresponding linear system.
 
-  a->Assemble();  
-  
+  a->Assemble();
+
   // cout << "Bilinear form assembled" << endl;
 
   HypreParMatrix A;
@@ -176,36 +176,34 @@ int main(int argc, char *argv[])
 
   a->RecoverFEMSolution(X, *b, u);
 
+  //  Optional. Save displacement data.
+  ofstream dispdata("../results/IsotropicDisp_prl.dat");
+  dispdata.precision(8);
+  u.Save(dispdata);
 
-//  Optional. Save displacement data.
-//  ofstream dispdata("../results/IsotropicDisp_prl.dat");
-//  dispdata.precision(8);
-//  u.Save(dispdata);
+  // Create ParGridFunctions for stress and strain. First create fespaces.
 
-// Create ParGridFunctions for stress and strain. First create fespaces.
+  // Set up L2 FESpace to obtain one dof per element for each stress and strain component.
+  int numels = fespace->GetNE();
+  int str_comp = dim * 2;
 
-// Set up L2 FESpace to obtain one dof per element for each stress and strain component.
-int numels = fespace->GetNE();
-int str_comp = dim * 2;
+  mfem::L2_FECollection *L2fec;
+  mfem::ParFiniteElementSpace *L2fespace;
 
-mfem::L2_FECollection* L2fec;
-mfem::ParFiniteElementSpace* L2fespace;
+  L2fec = new mfem::L2_FECollection(0, dim);
+  L2fespace = new mfem::ParFiniteElementSpace(pmesh, L2fec, str_comp);
 
-L2fec = new mfem::L2_FECollection(0, dim);
-L2fespace = new mfem::ParFiniteElementSpace(pmesh, L2fec, str_comp);
+  ParGridFunction strain(L2fespace), stress(L2fespace);
+  strain = stress = 0.0;
 
-ParGridFunction strain(L2fespace), stress(L2fespace);
-strain = stress = 0.0;
+  // Create the GlobalStressStrain object and compute strains and stresses.
+  mfemplus::GlobalStressStrain StressStrain(pmesh, fespace, L2fespace);
+  StressStrain.GlobalStrain(u, strain);
+  StressStrain.GlobalStress(strain, E_func, NU_func, stress);
 
-// Create the GlobalStressStrain object and compute strains and stresses.
-mfemplus::GlobalStressStrain StressStrain(pmesh, fespace);
-StressStrain.GlobalStrain(u, strain);
-StressStrain.GlobalStress(strain, E_func, NU_func, stress);
-
-// Output max strain and stress from each parallel process.
-cout << "Maximum strain: " << strain.Max() << endl;
-cout << "Maximum stress: " << stress.Max() << endl;
-
+  // Output max strain and stress from each parallel process.
+  cout << "Maximum strain: " << strain.Max() << endl;
+  cout << "Maximum stress: " << stress.Max() << endl;
 
   //   Free the used memory.
   delete a;
@@ -218,4 +216,3 @@ cout << "Maximum stress: " << stress.Max() << endl;
 
   return 0;
 }
-
