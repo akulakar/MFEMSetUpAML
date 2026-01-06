@@ -54,6 +54,9 @@ set(JSON "/opt/homebrew/Cellar/nlohmann-json/3.12.0/include")
 # Path to OpenMP
 set(OPENMP "/opt/homebrew/Cellar/libomp/20.1.8/include/")
 
+# Path to Eigen
+set(EIGEN "/Users/Aashutosh/Academic/Software/eigen-5.0.0/Eigen")
+
 # Get all cpp files in drivers directory
 file(GLOB SRC "${CMAKE_SOURCE_DIR}/source/*.cpp")
 
@@ -82,6 +85,7 @@ foreach(src ${SRC})
 				        	${MPI_CXX_INCLUDE_DIRS}
 				        	${OpenMP_CXX_INCLUDE_DIRS}
 							${OPENMP}
+							${EIGEN}
 						    include		   					
 								)
 
