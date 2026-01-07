@@ -105,6 +105,16 @@ Now build it.
 
 The build is complete. The mfem folder must contain libmfem.a, which is a compiled library of the MFEM code that our C++ codes will use.
 
+### Additional libraries
+
+Below are some libraries that are used by MFEMPLUS. You do not need to store these in the MFEM folder since their scope is broader than MFEM.
+
+#### Download Eigen
+
+This is a header only library for eigenvalue and eigenvector calculations.
+Follow the instructions from the official [link](https://libeigen.gitlab.io/).
+Make sure to use the proper paths in the CMakeLists.txt file.
+
 ### Install Paraview
 
 Run 
